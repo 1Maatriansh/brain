@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="brain. — a personal memory space for ideas, thoughts, links and things worth keeping.">
+<title>brain. — your second memory</title>
+<style>
+:root{
+  --bg:#f7f6f2; --paper:#fcfbf8; --ink:#171716; --muted:#6f6d67; --faint:#9c9991;
+  --line:#dedbd3; --accent:#5b51ea; --accent-soft:#eceaff; --shadow:0 18px 55px rgba(24,22,15,.07);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.skip{position:fixed;left:16px;top:12px;z-index:100;transform:translateY(-150%);padding:9px 12px;background:var(--ink);color:var(--bg);border-radius:8px;text-decoration:none;font-size:12px}.skip:focus{transform:none}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+.header{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font:600 27px/1 var(--serif);letter-spacing:-1px;text-decoration:none}
+.nav{display:flex;align-items:center;gap:20px}.nav a{font-size:12px;text-decoration:none;color:var(--muted)}.nav a:hover{color:var(--ink)}
+.nav .open{padding:8px 11px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.hero{min-height:calc(100svh - 72px);display:grid;grid-template-columns:1fr .9fr;gap:70px;align-items:center;padding:54px 0 110px}
+.kicker{font:700 9px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+h1{font:500 clamp(60px,8vw,100px)/.88 var(--serif);letter-spacing:-5px;margin:18px 0 23px;max-width:690px}h1 em{font-style:italic;font-weight:400}
+.lead{max-width:610px;color:var(--muted);font-size:17px;line-height:1.8;margin:0}
+.heroActions{display:flex;gap:8px;align-items:center;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 14px;border-radius:9px;text-decoration:none;font-size:12px;font-weight:650;transition:transform .18s ease,border-color .18s ease}.btn:hover{transform:translateY(-1px)}.btn.primary{background:var(--ink);color:var(--bg);border:1px solid var(--ink)}.btn.secondary{background:var(--paper);border:1px solid var(--line)}
+.note{margin-top:10px;font-size:10px;color:var(--faint)}
+.heroVisual{display:grid;place-items:center;min-height:460px}.field{position:relative;width:min(470px,100%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(91,81,234,.11),transparent 58%)}
+.ring{position:absolute;inset:13%;border:1px solid rgba(91,81,234,.14);border-radius:50%;animation:slowSpin 70s linear infinite paused;animation-play-state:paused;will-change:transform}.ring.two{inset:27%;border-style:dashed;animation-duration:52s;animation-direction:reverse}.core{position:absolute;left:50%;top:50%;width:108px;height:108px;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--bg);font:600 20px var(--serif);box-shadow:0 22px 50px rgba(0,0,0,.14);z-index:2}
+.node{position:absolute;width:54px;height:54px;border-radius:50%;background:var(--paper);border:1px solid rgba(91,81,234,.23);display:grid;place-items:center;color:var(--accent);font:700 8px var(--mono);letter-spacing:1px;box-shadow:0 10px 26px rgba(0,0,0,.06);z-index:2}.a{left:7%;top:25%}.b{right:8%;top:31%;}.c{right:19%;bottom:10%;}.d{left:16%;bottom:17%}
+.connector{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(91,81,234,.32),transparent);transform-origin:left center}.c1{width:145px;left:21%;top:38%;transform:rotate(7deg)}.c2{width:160px;left:50%;top:43%;transform:rotate(-17deg)}.c3{width:150px;left:37%;top:63%;transform:rotate(22deg)}
+.particle{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 7px rgba(91,81,234,.08);z-index:3;animation:drift 11s ease-in-out infinite paused;will-change:transform,opacity}.p1{left:28%;top:32%}.p2{left:63%;top:53%;animation-delay:-2.1s}
+.fieldTag{position:absolute;font:700 8px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--faint)}.t1{left:10%;top:14%}.t2{right:4%;top:58%}.t3{left:30%;bottom:5%}
+.section{padding:120px 0;border-top:1px solid var(--line)}
+.eyebrow{font:700 9px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+.idea{max-width:780px}.idea h2,.how h2,.future h2{font:500 clamp(43px,5.2vw,68px)/.98 var(--serif);letter-spacing:-3px;margin:16px 0 20px}.idea p{font-size:17px;line-height:1.85;color:var(--muted);margin:0;max-width:740px}
+.ideaGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:62px;border-top:1px solid var(--line)}.ideaCell{padding:25px 24px 8px 0;border-right:1px solid var(--line)}.ideaCell:not(:first-child){padding-left:24px}.ideaCell:last-child{border-right:0}.ideaNum{font:700 9px var(--mono);letter-spacing:1.4px;color:var(--accent)}.ideaCell h3{font:500 25px var(--serif);letter-spacing:-.8px;margin:18px 0 8px}.ideaCell p{font-size:13px;line-height:1.7;color:var(--muted);margin:0;max-width:300px}
+.how{display:grid;grid-template-columns:.7fr 1.3fr;gap:74px;align-items:center}.howCopy p{font-size:16px;color:var(--muted);line-height:1.8;max-width:430px;margin:0}.stepList{display:grid;gap:4px;margin-top:27px}.step{appearance:none;text-align:left;border:0;border-top:1px solid var(--line);background:transparent;padding:14px 0;cursor:pointer}.step:last-child{border-bottom:1px solid var(--line)}.stepHead{display:flex;align-items:baseline;gap:11px}.stepNo{font:700 8px var(--mono);letter-spacing:1.4px;color:var(--accent)}.stepTitle{font:500 18px var(--serif)}.stepText{font-size:12px;color:var(--muted);margin:5px 0 0 25px;max-width:390px;display:none}.step.active .stepText{display:block}
+.demo{position:relative;min-height:480px;border:1px solid var(--line);border-radius:26px;background:var(--paper);overflow:hidden;box-shadow:var(--shadow);display:grid;place-items:center}.demo:before{content:"";position:absolute;width:75%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(91,81,234,.12),transparent 65%)}.demoRing{position:absolute;width:300px;height:300px;border:1px solid rgba(91,81,234,.13);border-radius:50%;animation:slowSpin 88s linear infinite paused;will-change:transform}.demoRing.two{width:390px;height:390px;border-style:dashed;animation-duration:72s;animation-direction:reverse}.demoCore{position:relative;z-index:3;width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:600 18px var(--serif);box-shadow:0 25px 50px rgba(0,0,0,.16)}
+.memory{position:absolute;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid rgba(91,81,234,.22);color:var(--accent);font:700 7px var(--mono);letter-spacing:1px;box-shadow:0 8px 24px rgba(0,0,0,.06);z-index:2}.m1{left:20%;top:24%}.m2{right:17%;top:28%}.m3{right:21%;bottom:18%}.m4{left:20%;bottom:22%}
+.svgLine{position:absolute;inset:0;width:100%;height:100%;z-index:1}.svgLine path{fill:none;stroke:rgba(91,81,234,.28);stroke-width:1}.movingDot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 8px rgba(91,81,234,.08);z-index:4;offset-path:path("M 165 235 C 275 120, 370 120, 500 235 C 620 350, 720 335, 835 235");animation:pathMove 10.5s ease-in-out infinite paused;will-change:offset-distance,opacity}
+.demoText{position:absolute;left:28px;right:28px;bottom:22px;text-align:center;color:var(--muted);font-size:11px;letter-spacing:.1px}
+.future{display:grid;grid-template-columns:1fr .85fr;gap:90px;align-items:center}.future p{font-size:16px;line-height:1.85;color:var(--muted);max-width:600px}.quote{font:500 clamp(32px,4vw,52px)/1.08 var(--serif);letter-spacing:-2px;margin:0}.futureList{margin-top:32px;display:grid;gap:0}.futureItem{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.futureItem b{color:var(--ink);font-weight:600}
+.final{text-align:center;padding:135px 0 120px;border-top:1px solid var(--line)}.final h2{font:500 clamp(52px,6.5vw,84px)/.92 var(--serif);letter-spacing:-4px;max-width:800px;margin:0 auto 18px}.final p{font-size:15px;color:var(--muted);max-width:520px;margin:0 auto 28px;line-height:1.8}
+.footer{border-top:1px solid var(--line);padding:32px 0 42px;display:flex;justify-content:space-between;gap:25px}.footerCopy{font-size:11px;color:var(--muted)}.footerLinks{display:flex;gap:17px;flex-wrap:wrap}.footerLinks a{font-size:11px;color:var(--muted);text-decoration:none}.footerLinks a:hover{text-decoration:underline;text-underline-offset:3px}
+.heroVisual.is-visible .ring{animation-play-state:running}.heroVisual.is-visible .particle{animation-play-state:running}.how.is-visible .demoRing,.how.is-visible .movingDot{animation-play-state:running}.heroVisual,.how .demo{transition:transform 1s ease}.heroVisual.is-visible{transform:translateY(-4px)}.how.is-visible .demo{transform:translateY(-4px)}@keyframes slowSpin{to{transform:rotate(360deg)}}@keyframes drift{0%,100%{transform:translate3d(0,0,0);opacity:.32}50%{transform:translate3d(12px,-8px,0);opacity:.92}}@keyframes pathMove{0%{offset-distance:0%;opacity:0}12%{opacity:.9}48%{opacity:1}78%{opacity:.9}100%{offset-distance:100%;opacity:0}}
+@media(max-width:900px){.hero,.how,.future{grid-template-columns:1fr;gap:48px}.hero{padding-top:38px}.heroVisual{min-height:390px}.ideaGrid{grid-template-columns:1fr}.ideaCell,.ideaCell:not(:first-child){padding:22px 0;border-right:0;border-bottom:1px solid var(--line)}.ideaCell:last-child{border-bottom:0}.demo{min-height:430px}.future{gap:35px}}
+@media(max-width:600px){.wrap{width:min(100% - 30px,1120px)}.header{height:64px}.nav a:not(.open){display:none}.logo{font-size:26px}h1{font-size:59px;letter-spacing:-3.5px}.lead{font-size:15px}.hero{padding:35px 0 80px}.heroVisual{min-height:330px}.field{width:94vw;max-width:380px}.core{width:88px;height:88px;font-size:17px}.node{width:46px;height:46px}.section{padding:90px 0}.idea h2,.how h2,.future h2{letter-spacing:-2px}.demo{min-height:355px;border-radius:20px}.demoRing{width:220px;height:220px}.demoRing.two{width:290px;height:290px}.demoCore{width:80px;height:80px;font-size:16px}.memory{width:38px;height:38px}.final{padding:95px 0 90px}.final h2{letter-spacing:-3px}.footer{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header wrap">
+  <a class="logo" href="index.html" aria-label="brain. home">brain.</a>
+  <nav class="nav" aria-label="Primary navigation">
+    <a href="#idea">The idea</a>
+    <a href="#how">How it works</a>
+    <a class="open" href="app.html">Open brain. ↗</a>
+  </nav>
+</header>
+<main id="main">
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div>
+    <div class="kicker">your second memory</div>
+    <h1 id="hero-title">remember more.<br><em>think better.</em></h1>
+    <p class="lead">A quiet place for the things you notice, wonder about, want to build, and don't want to lose. Put them in once. Give your future self somewhere to find them.</p>
+    <div class="heroActions"><a class="btn primary" href="app.html">Start using brain.</a><a class="btn secondary" href="#idea">Why it exists</a></div>
+    <div class="note">No system to learn. Capture first.</div>
+  </div>
+  <div class="heroVisual" aria-label="Abstract visual showing memories becoming connected">
+    <div class="field" aria-hidden="true">
+      <div class="ring"></div><div class="ring two"></div><div class="core">brain.</div>
+      <div class="node a">IDEA</div><div class="node b">LINK</div><div class="node c">THOUGHT</div><div class="node d">NOTE</div>
+      <span class="connector c1"></span><span class="connector c2"></span><span class="connector c3"></span>
+      <span class="particle p1"></span><span class="particle p2"></span>
+      <span class="fieldTag t1">capture</span><span class="fieldTag t2">reconnect</span><span class="fieldTag t3">remember</span>
+    </div>
+  </div>
+</section>
+
+<section id="idea" class="section"><div class="wrap">
+  <div class="idea"><div class="eyebrow">about brain.</div><h2>You already think about thousands of things. Most of them disappear.</h2><p>Your best ideas rarely arrive at the perfect moment. A question appears while you're walking. A useful article gets buried in a tab. A thought makes sense six months later. brain. gives those moments a place to stay, so time can work for you instead of erasing them.</p></div>
+  <div class="ideaGrid">
+    <article class="ideaCell"><div class="ideaNum">01</div><h3>Keep the spark.</h3><p>Drop in thoughts, ideas, links, notes, study material, or anything you want to remember.</p></article>
+    <article class="ideaCell"><div class="ideaNum">02</div><h3>Return without digging.</h3><p>Find things again through memory, search, dates, and collections — without building a filing system first.</p></article>
+    <article class="ideaCell"><div class="ideaNum">03</div><h3>Notice your own patterns.</h3><p>Over time, old things become context. You start seeing what keeps coming back, changing, and connecting.</p></article>
+  </div>
+</div></section>
+
+<section id="how" class="section"><div class="wrap how">
+  <div class="howCopy">
+    <div class="eyebrow">how to use brain.</div><h2>Three habits.<br>That's it.</h2><p>You don't need to organize your life before you start. brain. is built around a simple reflex: when something feels worth keeping, put it here.</p>
+    <div class="stepList" role="tablist" aria-label="How to use brain.">
+      <button class="step active" id="step0" role="tab" aria-selected="true" aria-controls="demo" onclick="setStep(0)"><div class="stepHead"><span class="stepNo">01</span><span class="stepTitle">Capture</span></div><div class="stepText">Paste a link. Write a thought. Save an idea. Don't sort it first.</div></button>
+      <button class="step" id="step1" role="tab" aria-selected="false" aria-controls="demo" onclick="setStep(1)"><div class="stepHead"><span class="stepNo">02</span><span class="stepTitle">Remember</span></div><div class="stepText">Come back through search, your memory archive, dates, or a collection.</div></button>
+      <button class="step" id="step2" role="tab" aria-selected="false" aria-controls="demo" onclick="setStep(2)"><div class="stepHead"><span class="stepNo">03</span><span class="stepTitle">Reconnect</span></div><div class="stepText">An old thought can meet a new one. That is where your personal universe starts.</div></button>
+    </div>
+  </div>
+  <div class="demo" id="demo" aria-label="Interactive illustration of how brain. works">
+    <div class="demoRing"></div><div class="demoRing two"></div><div class="demoCore">brain.</div>
+    <div class="memory m1">IDEA</div><div class="memory m2">LINK</div><div class="memory m3">THOUGHT</div><div class="memory m4">NOTE</div>
+    <svg class="svgLine" viewBox="0 0 1000 480" preserveAspectRatio="none" aria-hidden="true"><path d="M165 235 C275 120, 370 120, 500 235 C620 350, 720 335, 835 235"/><path d="M170 238 C315 330, 405 325, 500 240 C610 150, 720 155, 830 240" opacity=".45"/></svg>
+    <span class="movingDot" aria-hidden="true"></span>
+    <div class="demoText" id="demoText">See something worth keeping → put it in brain. → keep moving.</div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap future">
+  <div><div class="eyebrow">the long game</div><h2>The longer you use it, the more it becomes yours.</h2><p>At first, brain. is simply a place to put things. Months later, it becomes a record of what interested you, what you were learning, what you wanted to make, and what you kept returning to.</p><div class="futureList"><div class="futureItem"><span>↗</span><span><b>Less “where did I see that?”</b><br>More continuity between the things you discover.</span></div><div class="futureItem"><span>↗</span><span><b>More context for your decisions.</b><br>Your past thinking is still available when you need it.</span></div><div class="futureItem"><span>↗</span><span><b>A clearer sense of what matters to you.</b><br>Patterns are easier to notice when they have somewhere to accumulate.</span></div></div></div>
+  <blockquote class="quote">“You don't need a better memory. You need somewhere to put it.”</blockquote>
+</div></section>
+
+<section class="final"><div class="wrap"><div class="eyebrow">start small</div><h2>Put the first thing you don't want to lose somewhere safe.</h2><p>Your first memory takes seconds. Everything after that is simply your life, collected as you live it.</p><a class="btn primary" href="app.html">Open brain.</a></div></section>
+</main>
+<footer class="footer wrap"><div class="footerCopy">brain. — your personal memory space.</div><nav class="footerLinks" aria-label="Legal navigation"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a></nav></footer>
+<script>
+const messages=[
+  'See something worth keeping → put it in brain. → keep moving.',
+  'Need it later → search your memory → find it without digging.',
+  'An old thought meets a new one → connections start to appear.'
+];
+function setStep(i){
+  document.querySelectorAll('.step').forEach((el,n)=>{el.classList.toggle('active',n===i);el.setAttribute('aria-selected',n===i?'true':'false')});
+  document.getElementById('demoText').textContent=messages[i];
+}
+(function(){const mq=window.matchMedia('(prefers-reduced-motion: reduce)'); if(mq.matches)return; const els=document.querySelectorAll('.heroVisual,.how'); const io=new IntersectionObserver(entries=>entries.forEach(e=>{e.target.classList.toggle('is-visible',e.isIntersecting)}),{threshold:.28,rootMargin:'0px 0px -10% 0px'}); els.forEach(el=>io.observe(el));})();
+</script>
+</body>
+</html>
