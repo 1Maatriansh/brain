@@ -52,7 +52,27 @@ h1{font:500 clamp(60px,8vw,100px)/.88 var(--serif);letter-spacing:-5px;margin:18
 .heroVisual.is-visible .ring{animation-play-state:running}.heroVisual.is-visible .particle{animation-play-state:running}.how.is-visible .demoRing,.how.is-visible .movingDot{animation-play-state:running}.heroVisual,.how .demo{transition:transform 1s ease}.heroVisual.is-visible{transform:translateY(-4px)}.how.is-visible .demo{transform:translateY(-4px)}@keyframes slowSpin{to{transform:rotate(360deg)}}@keyframes drift{0%,100%{transform:translate3d(0,0,0);opacity:.32}50%{transform:translate3d(12px,-8px,0);opacity:.92}}@keyframes pathMove{0%{offset-distance:0%;opacity:0}12%{opacity:.9}48%{opacity:1}78%{opacity:.9}100%{offset-distance:100%;opacity:0}}
 @media(max-width:900px){.hero,.how,.future{grid-template-columns:1fr;gap:48px}.hero{padding-top:38px}.heroVisual{min-height:390px}.ideaGrid{grid-template-columns:1fr}.ideaCell,.ideaCell:not(:first-child){padding:22px 0;border-right:0;border-bottom:1px solid var(--line)}.ideaCell:last-child{border-bottom:0}.demo{min-height:430px}.future{gap:35px}}
 @media(max-width:600px){.wrap{width:min(100% - 30px,1120px)}.header{height:64px}.nav a:not(.open){display:none}.logo{font-size:26px}h1{font-size:59px;letter-spacing:-3.5px}.lead{font-size:15px}.hero{padding:35px 0 80px}.heroVisual{min-height:330px}.field{width:94vw;max-width:380px}.core{width:88px;height:88px;font-size:17px}.node{width:46px;height:46px}.section{padding:90px 0}.idea h2,.how h2,.future h2{letter-spacing:-2px}.demo{min-height:355px;border-radius:20px}.demoRing{width:220px;height:220px}.demoRing.two{width:290px;height:290px}.demoCore{width:80px;height:80px;font-size:16px}.memory{width:38px;height:38px}.final{padding:95px 0 90px}.final h2{letter-spacing:-3px}.footer{flex-direction:column}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* FAQ */
+.faq{padding:105px 0 115px}
+.faqInner{max-width:860px}
+.faqHead{max-width:620px;margin-bottom:34px}
+.faqHead h2{font:500 clamp(42px,5.5vw,64px)/.98 var(--serif);letter-spacing:-2.7px;margin:15px 0 14px}
+.faqHead p{margin:0;color:var(--muted);font-size:15px;line-height:1.7;max-width:560px}
+.faqList{display:grid;gap:10px}
+.faqItem{background:var(--paper);border:0;border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,.05);overflow:hidden}
+.faqQuestion{position:relative;width:100%;min-height:72px;padding:21px 54px 21px 0;text-align:left;background:transparent;font-size:15px;color:var(--ink);display:flex;align-items:center;cursor:pointer;transition:color .18s ease}
+.faqQuestion:hover{color:var(--accent);background:rgba(91,81,234,.025)}
+.faqQuestion .faqPlus{position:absolute;right:3px;top:50%;transform:translateY(-50%);font:400 25px/1 var(--serif);color:var(--faint);transition:transform .25s ease,color .25s ease}
+.faqQuestion .faqChevron{display:none}
+.faqItem.open .faqQuestion{font-weight:600}
+.faqItem.open .faqQuestion .faqPlus{transform:translateY(-50%) rotate(45deg);color:var(--accent)}
+.faqAnswer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s cubic-bezier(.22,.8,.32,1)}
+.faqItem.open .faqAnswer{grid-template-rows:1fr}
+.faqAnswerInner{overflow:hidden;padding:0 54px 0 0}
+.faqItem.open .faqAnswerInner{padding-bottom:22px}
+.faqAnswerInner p{margin:0;color:var(--muted);font-size:13px;line-height:1.75;max-width:650px}
+@media(max-width:600px){.faq{padding:82px 0 90px}.faqQuestion{min-height:66px;padding:19px 42px 19px 0}.faqAnswerInner{padding-right:38px}}
 </style>
 </head>
 <body>
@@ -62,6 +82,7 @@ h1{font:500 clamp(60px,8vw,100px)/.88 var(--serif);letter-spacing:-5px;margin:18
   <nav class="nav" aria-label="Primary navigation">
     <a href="#idea">The idea</a>
     <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
     <a class="open" href="app.html">Open brain. ↗</a>
   </nav>
 </header>
@@ -117,6 +138,36 @@ h1{font:500 clamp(60px,8vw,100px)/.88 var(--serif);letter-spacing:-5px;margin:18
   <blockquote class="quote">“You don't need a better memory. You need somewhere to put it.”</blockquote>
 </div></section>
 
+<section id="faq" class="faq"><div class="wrap faqInner">
+  <div class="faqHead">
+    <div class="eyebrow">faq</div>
+    <h2>Things worth knowing first.</h2>
+    <p>The useful answers, without turning brain. into a manual.</p>
+  </div>
+  <div class="faqList">
+    <div class="faqItem">
+      <button class="faqQuestion" aria-expanded="false"><span>What exactly is brain.?</span><span class="faqPlus">+</span></button>
+      <div class="faqAnswer"><div class="faqAnswerInner"><p>brain. is a personal memory space for the things you notice, think about, learn, want to make, or return to later.</p></div></div>
+    </div>
+    <div class="faqItem">
+      <button class="faqQuestion" aria-expanded="false"><span>What should I save?</span><span class="faqPlus">+</span></button>
+      <div class="faqAnswer"><div class="faqAnswerInner"><p>Anything worth keeping: a thought, idea, note, study point, useful link, question, or something you know future-you may want back.</p></div></div>
+    </div>
+    <div class="faqItem">
+      <button class="faqQuestion" aria-expanded="false"><span>Do I need to organize everything?</span><span class="faqPlus">+</span></button>
+      <div class="faqAnswer"><div class="faqAnswerInner"><p>No. The point is to capture first. brain. should reduce the need to build a filing system before you can start using it.</p></div></div>
+    </div>
+    <div class="faqItem">
+      <button class="faqQuestion" aria-expanded="false"><span>Is brain. just a notes app?</span><span class="faqPlus">+</span></button>
+      <div class="faqAnswer"><div class="faqAnswerInner"><p>Notes are the starting point. The bigger idea is memory: finding things again, rediscovering old thoughts, and eventually seeing connections over time.</p></div></div>
+    </div>
+    <div class="faqItem">
+      <button class="faqQuestion" aria-expanded="false"><span>Where is my data stored right now?</span><span class="faqPlus">+</span></button>
+      <div class="faqAnswer"><div class="faqAnswerInner"><p>In this current prototype, your saved items stay in your browser. Cloud accounts, syncing, backups, and the deeper intelligence layer are planned for later.</p></div></div>
+    </div>
+  </div>
+</div></section>
+
 <section class="final"><div class="wrap"><div class="eyebrow">start small</div><h2>Put the first thing you don't want to lose somewhere safe.</h2><p>Your first memory takes seconds. Everything after that is simply your life, collected as you live it.</p><a class="btn primary" href="app.html">Open brain.</a></div></section>
 </main>
 <footer class="footer wrap"><div class="footerCopy">brain. — your personal memory space.</div><nav class="footerLinks" aria-label="Legal navigation"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a></nav></footer>
@@ -130,6 +181,21 @@ function setStep(i){
   document.querySelectorAll('.step').forEach((el,n)=>{el.classList.toggle('active',n===i);el.setAttribute('aria-selected',n===i?'true':'false')});
   document.getElementById('demoText').textContent=messages[i];
 }
+
+// FAQ accordion
+document.querySelectorAll('.faqQuestion').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    const item=button.closest('.faqItem');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faqItem').forEach((other)=>{
+      other.classList.remove('open');
+      const q=other.querySelector('.faqQuestion');
+      if(q) q.setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){ item.classList.add('open'); button.setAttribute('aria-expanded','true'); }
+  });
+});
+
 (function(){const mq=window.matchMedia('(prefers-reduced-motion: reduce)'); if(mq.matches)return; const els=document.querySelectorAll('.heroVisual,.how'); const io=new IntersectionObserver(entries=>entries.forEach(e=>{e.target.classList.toggle('is-visible',e.isIntersecting)}),{threshold:.28,rootMargin:'0px 0px -10% 0px'}); els.forEach(el=>io.observe(el));})();
 </script>
 </body>
