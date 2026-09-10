@@ -1,25 +1,25 @@
-<img width="845" height="647" alt="image" src="https://github.com/user-attachments/assets/164a94c2-5333-4a5e-bc7e-c5444acea709" />
-Brain
-────────────────────────────
+# 🧠 Brain
 
-A personal knowledge workspace designed to help
-you capture thoughts, ideas, resources and notes
-and reconnect with them over time.
+A personal knowledge workspace for capturing,
+organizing and reconnecting ideas.
 
-✨ Features
-• Thought capture
-• Organization
-• Timeline
-• Saved resources
-• Multiple themes
+## ✨ Preview
 
-🛠️ Built with
-HTML
-CSS
-JavaScript
+<img width="1004" height="642" alt="image" src="https://github.com/user-attachments/assets/961bd87f-6aa5-4c72-985f-9fdc248731d1" />
 
-🚀 Live Demo
-[ Open Brain ]
 
-📸 Screenshots
-...
+## 🚀 Features
+
+- Capture thoughts
+- Organize ideas
+- Timeline
+- Saved resources
+- Multiple themes
+
+## 🛠️ Built With
+
+HTML • CSS • JavaScript
+
+## 🌐 Live Demo
+
+[Open Brain](https://brainzz.netlify.app/)
